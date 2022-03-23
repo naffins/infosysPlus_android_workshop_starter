@@ -47,6 +47,9 @@ public class ConnectActivity extends AppCompatActivity {
                 // Test if input string is valid IP address
                 if (Pattern.matches(IP_ADDRESS_REGEX,inputIpAddress)) {
 
+                    // Set IP address
+                    RequestHelper.setIpAddress(inputIpAddress);
+
                     // TODO: Implement code which connects to REST API
                     // (1) Send JSON string "{\"connect\": true}" to route / on server
                     // (2) Confirm that the reply is a JSON string "{\"success\": true}"
