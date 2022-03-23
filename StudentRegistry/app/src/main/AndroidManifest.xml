@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TTSApp">
+        android:theme="@style/Theme.StudentRegistry">
         <activity
             android:name="com.example.studentregistry.LoadResultActivity"
             android:exported="false" />
