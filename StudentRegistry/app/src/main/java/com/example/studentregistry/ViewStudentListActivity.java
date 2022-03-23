@@ -87,7 +87,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
                 // (1) Make GET request to /student_list, sending JSON filter as content
                 // (2) Retrieve JSON input, which is a JSONArray of JSONObjects with fields "id", "year",
                 //  "is_undergraduate", "is_vaccinated"
-                // (3) Start ViewStudentListActivity, passing the received JSONArray
+                // (3) Start ViewStudentListActivity, passing the received JSONArray under key listData
 
                 // TODO: Remove this filler code
                 // -----START OF CODE TO BE REMOVED-----

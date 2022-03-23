@@ -4,7 +4,7 @@ package com.example.studentregistry;
 // TODO: Complete this class (to be guided)
 public class RequestHelper extends Thread {
 
-    public static interface RequestTask {
+    public static interface PostRequestTask {
 
     }
 
