@@ -1,11 +1,13 @@
-version: "3"
+# Use root/example as user/password credentials
+version: '3.1'
+
 services:
-  mysql:
-    container_name: mysql
-    image: mysql:latest
-    command: --max_allowed_packet=256M
-    restart: on-failure
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db
-    network_mode: host
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
