@@ -115,7 +115,7 @@ public class ModifyStudentListActivity extends AppCompatActivity {
                 }
 
                 // TODO: Add delete student functionality
-                // (1) Make POST request with JSON string "{\"id\": ...}"
+                // (1) Make DELETE request to /delete_student with JSON string "{\"id\": ...}"
                 // (2) Get JSON reply
                 // (3) Check if reply is "{\"success\": true}" to see if deletion is successful
 

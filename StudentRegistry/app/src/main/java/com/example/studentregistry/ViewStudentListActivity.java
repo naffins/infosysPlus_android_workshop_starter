@@ -84,7 +84,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
                 }
 
                 // TODO: Add functionality to retrieve user list
-                // (1) Make POST request, sending JSON filter as content
+                // (1) Make GET request, sending JSON filter as content
                 // (2) Retrieve JSON input, which is a JSONArray of JSONObjects with fields "id", "year",
                 //  "is_undergraduate", "is_vaccinated"
                 // (3) Start ViewStudentListActivity, passing the received JSONArray
