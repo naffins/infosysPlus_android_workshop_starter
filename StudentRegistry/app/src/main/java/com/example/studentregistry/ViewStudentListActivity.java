@@ -82,7 +82,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
                 // Get filter query parameters
                 String filter = compileFilter();
                 if (filter==null) {
-                    Toast.makeText(getApplicationContext(),FILTER_COMPILE_ERROR,Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),FILTER_COMPILE_ERROR,Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -125,7 +125,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
                     listData = jsonArray.toString();
                 }
                 catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),MOCK_JSON_COMPILE_ERROR_TEMP,Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),MOCK_JSON_COMPILE_ERROR_TEMP,Toast.LENGTH_SHORT).show();
                 }
 
                 // Start results page activity
@@ -176,17 +176,17 @@ public class ViewStudentListActivity extends AppCompatActivity {
 
     private String compileFilter() {
         ArrayList<String> queryParams = new ArrayList<String>();
-        if (nameCheckBox.isChecked()) queryParams.add("name="+nameEditText.getText().toString());
-        if (idCheckBox.isChecked()) queryParams.add("id="+idEditText.getText().toString());
-        if (yearCheckBox.isChecked()) queryParams.add("year="+yearEditText.getText().toString());
-        if (vacCheckBox.isChecked()) queryParams.add("is_vaccinated="+Boolean.toString(vacSpinner.getSelectedItem().toString().equals(vacSpinnerDefault)));
-        if (undergradCheckBox.isChecked()) queryParams.add("is_undergraduate="+Boolean.toString(undergradSpinner.getSelectedItem().toString().equals(undergradSpinnerDefault)));
         try {
-            return URLEncoder.encode(String.join("&",queryParams),"UTF-8");
+            if (nameCheckBox.isChecked()) queryParams.add("name="+URLEncoder.encode(nameEditText.getText().toString(),"UTF-8"));
         }
         catch (UnsupportedEncodingException e) {
             return null;
         }
+        if (idCheckBox.isChecked()) queryParams.add("id="+idEditText.getText().toString());
+        if (yearCheckBox.isChecked()) queryParams.add("year="+yearEditText.getText().toString());
+        if (vacCheckBox.isChecked()) queryParams.add("is_vaccinated="+Boolean.toString(vacSpinner.getSelectedItem().toString().equals(vacSpinnerDefault)));
+        if (undergradCheckBox.isChecked()) queryParams.add("is_undergraduate="+Boolean.toString(undergradSpinner.getSelectedItem().toString().equals(undergradSpinnerDefault)));
+        return String.join("&",queryParams);
     }
 
 }

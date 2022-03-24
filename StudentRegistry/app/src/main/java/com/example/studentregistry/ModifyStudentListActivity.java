@@ -75,7 +75,7 @@ public class ModifyStudentListActivity extends AppCompatActivity {
                 // Get JSON string to be passed to server
                 String inputJson = compileAddJSONString(addId, addName, addYear, isVaccinated, isUndergrad);
                 if (inputJson == null) {
-                    Toast.makeText(getApplicationContext(), JSON_COMPILE_ERROR, Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), JSON_COMPILE_ERROR, Toast.LENGTH_SHORT).show();
                 }
 
                 // TODO: Add functionality to perform addition
