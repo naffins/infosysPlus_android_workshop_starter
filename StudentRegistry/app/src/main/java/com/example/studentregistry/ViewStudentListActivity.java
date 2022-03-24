@@ -16,6 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class ViewStudentListActivity extends AppCompatActivity {
@@ -25,7 +28,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
     private final static String undergradSpinnerDefault = "Undergraduate";
 
     // Toast messages
-    private final static String FILTER_COMPILE_ERROR = "Error: could not compile JSON search filter";
+    private final static String FILTER_COMPILE_ERROR = "Error: could not compile search filter";
     private final static String LIST_NOT_IMPLEMENTED_TEMP_BASE = "List function not implemented; attempted to list students with filter";
     private final static String MOCK_JSON_COMPILE_ERROR_TEMP = "Error: failed to compile mock JSON string";
 
@@ -76,7 +79,7 @@ public class ViewStudentListActivity extends AppCompatActivity {
                 // Validate inputs
                 if (!validateFields()) return;
 
-                // Get filter JSON
+                // Get filter query parameters
                 String filter = compileFilter();
                 if (filter==null) {
                     Toast.makeText(getApplicationContext(),FILTER_COMPILE_ERROR,Toast.LENGTH_SHORT);
@@ -84,10 +87,11 @@ public class ViewStudentListActivity extends AppCompatActivity {
                 }
 
                 // TODO: Add functionality to retrieve user list
-                // (1) Make GET request to /student_list, sending JSON filter as content
-                // (2) Retrieve JSON input, which is a JSONArray of JSONObjects with fields "id", "year",
+                // (1) Make GET request to /student_list, sending filter as query parameters
+                // (2) Check if response code is 200 or otherwise
+                // (3) Retrieve JSON output, which is a JSONArray of JSONObjects with fields "id", "year",
                 //  "is_undergraduate", "is_vaccinated"
-                // (3) Start ViewStudentListActivity, passing the received JSONArray under key listData
+                // (4) Start ViewStudentListActivity, passing the received JSONArray under key listData
 
                 // TODO: Remove this filler code
                 // -----START OF CODE TO BE REMOVED-----
@@ -171,17 +175,18 @@ public class ViewStudentListActivity extends AppCompatActivity {
     }
 
     private String compileFilter() {
-        JSONObject filterJson = new JSONObject();
+        ArrayList<String> queryParams = new ArrayList<String>();
+        if (nameCheckBox.isChecked()) queryParams.add("name="+nameEditText.getText().toString());
+        if (idCheckBox.isChecked()) queryParams.add("id="+idEditText.getText().toString());
+        if (yearCheckBox.isChecked()) queryParams.add("year="+yearEditText.getText().toString());
+        if (vacCheckBox.isChecked()) queryParams.add("is_vaccinated="+Boolean.toString(vacSpinner.getSelectedItem().toString().equals(vacSpinnerDefault)));
+        if (undergradCheckBox.isChecked()) queryParams.add("is_undergraduate="+Boolean.toString(undergradSpinner.getSelectedItem().toString().equals(undergradSpinnerDefault)));
         try {
-            if (nameCheckBox.isChecked()) filterJson.put("name",nameEditText.getText().toString());
-            if (idCheckBox.isChecked()) filterJson.put("id",Integer.valueOf(idEditText.getText().toString()));
-            if (yearCheckBox.isChecked()) filterJson.put("year",Integer.valueOf(yearEditText.getText().toString()));
-            if (vacCheckBox.isChecked()) filterJson.put("is_vaccinated",vacSpinner.getSelectedItem().toString().equals(vacSpinnerDefault));
-            if (undergradCheckBox.isChecked()) filterJson.put("is_undergraduate",undergradSpinner.getSelectedItem().toString().equals(undergradSpinnerDefault));
-        } catch (JSONException e) {
+            return URLEncoder.encode(String.join("&",queryParams),"UTF-8");
+        }
+        catch (UnsupportedEncodingException e) {
             return null;
         }
-        return filterJson.toString();
     }
 
 }

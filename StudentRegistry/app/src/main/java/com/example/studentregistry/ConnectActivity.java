@@ -51,8 +51,8 @@ public class ConnectActivity extends AppCompatActivity {
                     RequestHelper.setIpAddress(inputIpAddress);
 
                     // TODO: Implement code which connects to REST API
-                    // (1) Send JSON string "{\"connect\": true}" to route / on server using GET method
-                    // (2) Confirm that the reply is a JSON string "{\"success\": true}"
+                    // (1) Send GET request to route / on server (no body)
+                    // (2) Confirm that the reply has response code 200
                     // (3) If condition in (2) is met, move to Main Menu
 
 

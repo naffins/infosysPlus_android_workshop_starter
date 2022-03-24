@@ -81,8 +81,7 @@ public class ModifyStudentListActivity extends AppCompatActivity {
                 // TODO: Add functionality to perform addition
                 // (1) Make POST request to /add_student with inputJson
                 // (2) Get reply JSON
-                // (3) Check if JSON contains "error" key (in which case duplicate entry exists)
-                // (4) If not present, check if JSON contains "success": true to see if addition is successful
+                // (3) Check response code: is it 200 (success) or 400 (id already exists) or otherwise?
 
                 // TODO: Remove this filler code
                 // -----START OF CODE TO BE REMOVED-----
@@ -115,9 +114,9 @@ public class ModifyStudentListActivity extends AppCompatActivity {
                 }
 
                 // TODO: Add delete student functionality
-                // (1) Make DELETE request to /delete_student with JSON string "{\"id\": ...}"
-                // (2) Get JSON reply
-                // (3) Check if reply is "{\"success\": true}" to see if deletion is successful
+                // (1) Make DELETE request to /student?id=<student id>
+                // (2) Get reply
+                // (3) Check if response code is 200 or 400 (ID doesn't exist) or other
 
                 // TODO: Remove this filler code
                 // -----START OF CODE TO BE REMOVED-----
